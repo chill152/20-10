@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 💖</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/heart.png">
+
+    <!-- Google Fonts: Quicksand & Dancing Script & Pacifico (Full Vietnamese support) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Pacifico&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Falling Petals / Floating Hearts Canvas -->
+    <canvas id="petalsCanvas"></canvas>
+
+    <!-- Music Control Button -->
+    <div class="music-btn-container" id="musicBtnContainer">
+        <button id="musicToggleBtn" class="music-btn" title="Bật / Tắt Nhạc 20/10">
+            <i class="fa-solid fa-music music-icon"></i>
+            <span class="music-text">I Do - 911 🎵</span>
+        </button>
+        <audio id="bgMusic" loop preload="auto">
+            <source src="./assets/music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Navigation / Skip button for Truck Scene -->
+    <div class="scene-controls" id="sceneControls">
+        <button id="skipTruckBtn" class="control-btn" title="Chuyển đến phong thư">
+            <i class="fa-solid fa-envelope-open-text"></i> Xem phong thư ngay
+        </button>
+        <button id="replayTruckBtn" class="control-btn" style="display: none;" title="Xem lại xe giao quà">
+            <i class="fa-solid fa-truck-fast"></i> Xem xe giao quà
+        </button>
+    </div>
+
+    <!-- ==================== SCENE 1: MAIL TRUCK (CHUYỂN ĐỘNG XE) ==================== -->
+    <div id="truckScene" class="truck-scene active">
+        <!-- Delivery Banner / Heading -->
+        <div class="truck-banner">
+            <div class="banner-badge">🌸 THÔNG BÁO GIAO HÀNG ĐẶC BIỆT 🌸</div>
+            <h1 class="truck-title">Chuyến Xe Yêu Thương 20/10 Đang Đến!</h1>
+            <p class="truck-subtitle">Một bưu phẩm bí mật đang được vận chuyển đến bạn...</p>
+        </div>
+
+        <!-- Mail Truck Container (From Mail-truck-main) -->
+        <div class="truck-container">
+            <div class="container" id="truckMotionBox">
+                <div class="ts">
+                    <div class="box">
+                        <div class="truck-label">
+                            <span class="truck-brand">20/10 EXPRESS</span>
+                            <span class="truck-icon">💌</span>
+                        </div>
+                    </div>
+                    <div class="front">
+                        <div class="light"></div>
+                        <div class="trapezoid"></div>
+                        <div class="pipe"></div>
+                        <div class="pipe2"></div>
+                        
+                        <!-- Floating pixel hearts from the chimney -->
+                        <img class="img1" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img2" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img3" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img4" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img5" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img6" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img7" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img8" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img9" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img10" src="./assets/pixelHeart.gif" alt="heart">
+                        <img class="img11" src="./assets/pixelHeart.gif" alt="heart">
+
+                        <div class="front1"></div>
+                        <div class="front2"></div>
+                        <div class="window"></div>
+                        <div class="hood"></div>    
+                    </div>
+
+                    <!-- 4 Spinning Wheels -->
+                    <div class="tyre1">
+                        <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div>
+                    </div>
+                    <div class="tyre2">
+                        <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div>
+                    </div>
+                    <div class="tyre3">
+                        <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div>
+                    </div>
+                    <div class="tyre4">
+                        <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Road surface -->
+            <div class="truck-road">
+                <div class="road-line"></div>
+            </div>
+        </div>
+
+        <!-- Parcel dropped alert -->
+        <div class="parcel-drop-alert" id="parcelAlert">
+            <span class="sparkle">✨</span> Bưu phẩm yêu thương 20/10 đã đến nơi! <span class="sparkle">✨</span>
+        </div>
+    </div>
+
+
+    <!-- ==================== SCENE 2: ENVELOPE & HEART SHAPE (TỪ 8/3) ==================== -->
+    <div id="envelopeScene" class="envelope-scene">
+
+        <!-- Top Celebration Header -->
+        <div class="scene-header">
+            <span class="tag-date">20 · 10 · VIETNAMESE WOMEN'S DAY</span>
+            <h2 class="main-heading">Chúc Mừng Ngày Phụ Nữ Việt Nam</h2>
+        </div>
+
+        <!-- SVG Heart Curve with Running Text from 8-3 -->
+        <svg id="theSvg" viewBox="-120 -30 240 180" enable-background="new 0 0 174 148" xml:space="preserve">
+            <defs>
+                <filter id="f" filterUnits="userSpaceOnUse" x="-120" y="-30" width="120%" height="120%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"></feGaussianBlur>
+                    <feOffset in="blur" dx="3" dy="5" result="shadow"></feOffset>
+                    <feFlood flood-color="rgba(3,0,0,1)" result="color" />
+                    <feComposite in="color" in2="shadow" operator="in" />
+                    <feComposite in="SourceGraphic" />
+                </filter>
+                <path id="shape" d="M0, 21.054 
+           C0, 21.054 24.618, -15.165 60.750, 8.554 
+           C93.249, 29.888 57.749, 96.888 0, 117.388
+           C-57.749, 96.888  -93.249, 29.888 -60.750, 8.554
+           C-24.618, -15.165  -0, 21.054 -0, 21.054z" />
+                <path id="partialPath" />
+            </defs>
+
+            <text dy="-2">
+                <textPath id="svgTextPath" xlink:href="#partialPath" startOffset="10">
+                    🌹 Happy Vietnamese Women's Day 🌹 ......................................................................................................................................... 🌹 From With Love 20/10! 🌹
+                </textPath>
+            </text>
+
+            <use id="useThePath" xlink:href="#partialPath" stroke="rgba(255, 102, 102, 0.4)" stroke-width="1" stroke-dasharray="3,3" fill="none" />
+        </svg>
+
+        <!-- Center Envelope from 8-3-main -->
+        <div id="castle">
+            <div class="letter-box">
+                <div class="valentines" id="envelopeTrigger" title="Nhấp vào để mở thư!">
+                    <div class="envelope"></div>
+                    <div class="envelope-front"></div>
+                    <!-- Peeking Card inside envelope -->
+                    <div class="card">
+                        <div class="text">Happy</br>20/10</br>Day!</div>
+                        <div class="heart"></div>
+                    </div>
+                    <!-- Floating Hearts from envelope -->
+                    <div class="hearts">
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                        <div class="four"></div>
+                        <div class="five"></div>
+                    </div>
+                </div>
+                <!-- Envelope shadow -->
+                <div class="shadow"></div>
+            </div>
+        </div>
+
+        <!-- Hint to click -->
+        <div class="click-hint" id="clickHint">
+            <div class="pulse-icon">💌</div>
+            <p>Bấm vào phong thư để đọc lời chúc 20/10 nhé!</p>
+        </div>
+    </div>
+
+
+    <!-- ==================== SCENE 3: THE 20/10 LETTER MODAL (TỪ 8/3) ==================== -->
+    <div class="wrapperLetterForm" id="wrapperLetterForm">
+        <div class="boxLetter">
+            <i class="fa-solid fa-xmark close-letter-btn" id="closeLetterBtn" title="Đóng thư"></i>
+            
+            <div class="formLetter">
+                <!-- Heart badges on corners -->
+                <div class="heartLetter">
+                    <div class="heartLetterItem"></div>
+                </div>
+                <div class="heartLetter">
+                    <div class="heartLetterItem"></div>
+                </div>
+                
+                <div class="wrapperLetter">
+                    <!-- Left: Giftbox image with floating heart balloon from 8-3-main -->
+                    <div class="giftbox">
+                        <div class="img">
+                            <img src="./assets/giftbox.png" alt="Hộp quà 20/10">
+                        </div>
+                    </div>
+
+                    <!-- Right: Greeting Text with Typewriter Effect -->
+                    <div class="textLetter">
+                        <!-- Recipient selector pills -->
+                        <div class="recipient-pills">
+                            <span class="pill-label">Gửi đến:</span>
+                            <button class="pill active" data-type="lover">Người yêu 💖</button>
+                            <button class="pill" data-type="mom">Mẹ yêu ❤️</button>
+                            <button class="pill" data-type="teacher">Cô giáo 🌸</button>
+                            <button class="pill" data-type="sister">Chị / Em 🌷</button>
+                            <button class="pill" data-type="general">Tất cả phái đẹp ✨</button>
+                        </div>
+
+                        <!-- Typing Title & Content -->
+                        <h2 id="typedTitle"></h2>
+                        <div class="contentLetter-wrapper">
+                            <p class="contentLetter" id="typedContent"></p>
+                        </div>
+
+                        <!-- Heart Animation Gif from 8-3-main -->
+                        <div class="heartAnimation">
+                            <img src="./assets/heartAnimation.gif" alt="Beating Heart">
+                        </div>
+
+                        <!-- Action Buttons inside letter -->
+                        <div class="letter-actions">
+                            <button class="action-btn send-love-btn" id="sendLoveBtn">
+                                <i class="fa-solid fa-heart"></i> Thả tim yêu thương
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cute cats on bottom corners from 8-3-main -->
+                    <div class="mewmew1">
+                        <img src="./assets/mewmew.gif" alt="Cat Left">
+                    </div>
+                    <div class="mewmew2">
+                        <img src="./assets/mewmew.gif" alt="Cat Right">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Layered white card behind (From 8-3-main .before) -->
+            <div class="before"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./script.js"></script>
+</body>
+</html>
